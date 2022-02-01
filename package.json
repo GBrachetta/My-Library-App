@@ -35,13 +35,5 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1"
-  },
-  "eslintConfig": {
-    "extends": "@gbrachetta/eslint-config",
-    "rules": {
-      "sort-imports": "off",
-      "import/order": "off"
-    }
-  },
-  "prettier": "@gbrachetta/prettier-config"
+  }
 }
