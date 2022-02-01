@@ -7,6 +7,7 @@ const colors = require('colors');
 
 const connectDB = require('./config/db');
 const userRouter = require('./routes/userRoutes');
+const composerRouter = require('./routes/composerRoutes');
 const { errorHandler } = require('./middleware/errorMiddleware');
 
 dotenv.config();
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Routes
 app.use('/api/users', userRouter);
+app.use('/api/composers', composerRouter);
 
 // Serve Frontend
 if (process.env.NODE_ENV === 'production') {
@@ -28,7 +30,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/build')));
 
   app.get('*', (req, res) =>
-    res.sendFile(__dirname, '../', 'frontend', 'build', 'index.html'),
+    res.sendFile(__dirname, '../', 'frontend', 'build', 'index.html')
   );
 } else {
   app.get('/', (req, res) => {
