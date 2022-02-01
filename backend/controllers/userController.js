@@ -2,6 +2,7 @@
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const validator = require('validator');
 
 const User = require('../models/userModel');
 
@@ -22,6 +23,27 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
 
     throw new Error('Please include all fields');
+  }
+
+  // Email validation
+  if (!validator.isEmail(email)) {
+    res.status(400);
+
+    throw new Error('Please enter a valid email address');
+  }
+
+  // Password validation
+  if (
+    !validator.isStrongPassword(password, {
+      minLength: 6,
+      minNumbers: 0,
+      minSymbols: 0,
+      minUppercase: 0,
+    })
+  ) {
+    res.status(400);
+
+    throw new Error('Please enter a stronger password');
   }
 
   // Find if user exists
@@ -66,6 +88,13 @@ const loginUser = asyncHandler(async (req, res) => {
     res.status(400);
 
     throw new Error('Please include all fields');
+  }
+
+  // Email validation
+  if (!validator.isEmail(email)) {
+    res.status(400);
+
+    throw new Error('Please enter a valid email address');
   }
 
   const user = await User.findOne({ email });
