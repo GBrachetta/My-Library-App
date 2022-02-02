@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-import { login } from '../features/auth/authSlice';
+import Spinner from '../components/Spinner';
+import { login, reset } from '../features/auth/authSlice';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -13,10 +15,23 @@ const Login = () => {
   const { email, password } = formData;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { user, isLoading, isSuccess, isError, message } = useSelector(
     (state) => state.auth,
   );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess && user) {
+      navigate('/');
+    }
+
+    dispatch(reset());
+  }, [isError, isSuccess, message, navigate, user, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -35,6 +50,8 @@ const Login = () => {
 
     dispatch(login(userData));
   };
+
+  if (isLoading) return <Spinner />;
 
   return (
     <>
