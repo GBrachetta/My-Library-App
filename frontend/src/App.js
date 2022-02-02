@@ -1,4 +1,7 @@
+import 'react-toastify/dist/ReactToastify.css';
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Flip, ToastContainer } from 'react-toastify';
 
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
@@ -22,6 +25,11 @@ function App() {
           <Footer />
         </div>
       </Router>
+      <ToastContainer
+        theme="colored"
+        pauseOnFocusLoss={false}
+        transition={Flip}
+      />
     </>
   );
 }
