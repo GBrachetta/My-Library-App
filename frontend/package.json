@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "proxy": "http://localhost:5001",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
@@ -31,7 +32,9 @@
     "rules": {
       "sort-imports": "off",
       "import/order": "off",
-      "import/no-extraneous-dependencies": "off"
+      "import/no-extraneous-dependencies": "off",
+      "no-param-reassign": "off",
+      "no-shadow": "off"
     }
   },
   "prettier": "@gbrachetta/prettier-config",
