@@ -18,19 +18,24 @@ const bookSchema = mongoose.Schema(
       type: String,
       required: [true, 'Please enter the setting'],
     },
-    composed: {
+    dateComposed: {
       type: String,
     },
     publisher: {
       type: String,
     },
-    remarks: {
+    comments: {
       type: String,
     },
     hasParts: {
       type: String,
       enum: ['yes', 'no', 'n/a'],
       default: 'n/a',
+    },
+    catalogueNumber: {
+      type: String,
+      required: true,
+      default: 'Not assigned yet',
     },
   },
   {

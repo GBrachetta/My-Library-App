@@ -8,6 +8,7 @@ const colors = require('colors');
 const connectDB = require('./config/db');
 const userRouter = require('./routes/userRoutes');
 const composerRouter = require('./routes/composerRoutes');
+const bookRouter = require('./routes/bookRoutes');
 const { errorHandler } = require('./middleware/errorMiddleware');
 
 dotenv.config();
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 // Routes
 app.use('/api/users', userRouter);
 app.use('/api/composers', composerRouter);
+app.use('/api/books', bookRouter);
 
 // Serve Frontend
 if (process.env.NODE_ENV === 'production') {

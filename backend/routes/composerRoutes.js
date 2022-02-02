@@ -1,20 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const { protect } = require('../middleware/authMiddleware');
-const { updateComposer } = require('../controllers/composerController');
+const { protect, admin } = require('../middleware/authMiddleware');
 const {
   getComposers,
   createComposer,
   getComposer,
   deleteComposer,
+  updateComposer,
 } = require('../controllers/composerController');
 
-router.route('/').get(getComposers).post(protect, createComposer);
+router.route('/').get(protect, getComposers).post(admin, createComposer);
 
 router
   .route('/:composerId')
-  .get(getComposer)
-  .delete(protect, deleteComposer)
-  .put(protect, updateComposer);
+  .get(protect, getComposer)
+  .delete(admin, deleteComposer)
+  .put(admin, updateComposer);
 
 module.exports = router;

@@ -1,7 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const mongoose = require('mongoose');
 const Composer = require('../models/composerModel');
-const User = require('../models/userModel');
 
 // @desc    Get all composers
 // @route   GET /api/composers
