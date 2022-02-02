@@ -31,7 +31,7 @@ if (process.env.NODE_ENV === 'production') {
   // Set build folder as static
   app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-  app.get('*', (req, res) =>
+  app.get('*', (_, res) =>
     res.sendFile(__dirname, '../', 'frontend', 'build', 'index.html')
   );
 } else {
