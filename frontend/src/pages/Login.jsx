@@ -31,7 +31,7 @@ const Login = () => {
     }
 
     dispatch(reset());
-  }, []);
+  }, [isError, isSuccess, message, navigate, user, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -51,7 +51,7 @@ const Login = () => {
     dispatch(login(userData));
   };
 
-  if (isLoading) return <Spinner />;
+  // if (isLoading) return <Spinner />;
 
   return (
     <>
