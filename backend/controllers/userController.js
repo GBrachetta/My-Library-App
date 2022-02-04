@@ -165,44 +165,46 @@ const getMe = asyncHandler(async (req, res) => {
   res.status(200).json(user);
 });
 
-// const verifyToken = asyncHandler(async (req, res) => {
-//   try {
-//     const tokenPayload = jwt.verify(
-//       req.params.verificationToken,
-//       process.env.JWT_SECRET
-//     );
-
-//     const { user } = tokenPayload;
-
-//     await User.findByIdAndUpdate(user, { verified: true }, { new: true });
-//     // return res.redirect(process.env.FRONTEND);
-//   } catch (error) {
-//     res.status(400);
-//     throw new Error(error.message);
-//   }
-//   return res.redirect(process.env.FRONTEND);
-// });
-
 const verifyToken = asyncHandler(async (req, res) => {
-  const { verificationToken } = req.params;
-
-  if (verificationToken) {
-    jwt.verify(
-      verificationToken,
-      process.env.JWT_SECRET,
-      async (err, decodedToken) => {
-        if (err) {
-          res.status(400);
-          throw new Error(err);
-        } else {
-          const { user } = decodedToken;
-          await User.findByIdAndUpdate(user, { verified: true }, { new: true });
-        }
-      }
+  try {
+    const { user } = jwt.verify(
+      req.params.verificationToken,
+      process.env.JWT_SECRET
     );
-    res.redirect(process.env.FRONTEND);
+
+    const userInDb = await User.findById(user);
+
+    if (userInDb.verified) {
+      res.status(401);
+      throw new Error('Email already verified');
+    }
+
+    await User.findByIdAndUpdate(user, { verified: true }, { new: true });
+  } catch (error) {
+    res.status(400);
+    throw new Error(error.message);
   }
+  return res.redirect(process.env.FRONTEND);
 });
+
+// const verifyToken = async (req, res) => {
+//   const { verificationToken } = req.params;
+
+//   jwt.verify(
+//     verificationToken,
+//     process.env.JWT_SECRET,
+//     async (err, decodedToken) => {
+//       if (err) {
+//         res.status(400);
+//         throw new Error(err);
+//       } else {
+//         const { user } = decodedToken;
+//         await User.findByIdAndUpdate(user, { verified: true }, { new: true });
+//       }
+//     }
+//   );
+//   res.redirect(process.env.FRONTEND);
+// };
 
 module.exports = {
   registerUser,

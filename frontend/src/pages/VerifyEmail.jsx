@@ -16,17 +16,9 @@ const VerifyEmail = () => {
       toast.success('Email verified. You can now log in');
       navigate('/login');
     } catch (error) {
-      toast.error(error);
+      toast.error('Token invalid or expired. A new token will be sent.');
+      navigate('/login');
     }
-
-    // const response = await axios.get(`${API_URL}/${verificationToken}`);
-
-    // if (response) {
-    //   toast.success('Email verified. You can now log in');
-    //   navigate('/login');
-    // } else {
-    //   toast.error('error');
-    // }
   };
 
   return (
