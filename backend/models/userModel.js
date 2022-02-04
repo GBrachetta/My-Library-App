@@ -20,10 +20,15 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    verified: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 module.exports = mongoose.model('User', userSchema);

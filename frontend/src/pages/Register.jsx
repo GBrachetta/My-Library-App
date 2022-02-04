@@ -28,8 +28,11 @@ const Register = () => {
       toast.error(message);
     }
 
-    if (isSuccess && user) {
-      navigate('/');
+    if (isSuccess) {
+      navigate('/login');
+      toast.success(
+        'A confirmation email has been sent. Please check and login.',
+      );
     }
 
     dispatch(reset());

@@ -6,6 +6,7 @@ import { Flip, ToastContainer } from 'react-toastify';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
+import Error from './pages/Error';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -23,6 +24,7 @@ function App() {
               </Route>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/error" element={<Error />} />
             </Routes>
           </main>
           <Footer />
