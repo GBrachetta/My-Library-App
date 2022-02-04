@@ -7,6 +7,7 @@ const Composer = require('../models/composerModel');
 // @access  Public
 const getComposers = asyncHandler(async (req, res) => {
   const composers = await Composer.find();
+
   res.status(200).json(composers);
 });
 
@@ -45,6 +46,7 @@ const createComposer = asyncHandler(async (req, res) => {
     born,
     dead,
   });
+
   res.status(201).json(ticket);
 });
 
@@ -86,7 +88,7 @@ const updateComposer = asyncHandler(async (req, res) => {
   const updatedComposer = await Composer.findByIdAndUpdate(
     req.params.composerId,
     req.body,
-    { new: true }
+    { new: true },
   );
 
   res.status(201).json(updatedComposer);

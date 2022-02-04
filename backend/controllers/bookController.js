@@ -7,6 +7,7 @@ const Book = require('../models/bookModel');
 // @access  Public
 const getBooks = asyncHandler(async (req, res) => {
   const books = await Book.find();
+
   res.status(200).json(books);
 });
 
@@ -65,6 +66,7 @@ const addBook = asyncHandler(async (req, res) => {
     catalogueNumber,
     status: 'new',
   });
+
   res.status(201).json(book);
 });
 
@@ -114,7 +116,7 @@ const updateBook = asyncHandler(async (req, res) => {
   const updatedBook = await Book.findByIdAndUpdate(
     req.params.bookId,
     req.body,
-    { new: true }
+    { new: true },
   );
 
   res.status(201).json(updatedBook);
