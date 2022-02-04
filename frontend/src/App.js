@@ -10,6 +10,7 @@ import Error from './pages/Error';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import VerifyEmail from './pages/VerifyEmail';
 
 function App() {
   return (
@@ -24,6 +25,10 @@ function App() {
               </Route>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route
+                path="/verify-email/:verificationToken"
+                element={<VerifyEmail />}
+              />
               <Route path="/error" element={<Error />} />
             </Routes>
           </main>
