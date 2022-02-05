@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-exports.mailTransport = () =>
+const mailTransport = () =>
   nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -9,7 +9,7 @@ exports.mailTransport = () =>
     },
   });
 
-exports.generateEmail = (token) => {
+const generateEmail = (token) => {
   return `
   <!DOCTYPE html>
   <html lang="en">
@@ -40,3 +40,5 @@ exports.generateEmail = (token) => {
   </html>
   `;
 };
+
+module.exports = { mailTransport, generateEmail };

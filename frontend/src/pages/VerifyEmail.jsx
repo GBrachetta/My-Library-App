@@ -16,7 +16,9 @@ const VerifyEmail = () => {
       toast.success('Email verified. You can now log in');
       navigate('/login');
     } catch (error) {
+      // This is not good and it's hardcoding an error badly handled from ../backend/controllers/userController.js
       toast.error('Token invalid or expired. A new token will be sent.');
+      // TODO: Resend verification token to user (!?)
       navigate('/login');
     }
   };

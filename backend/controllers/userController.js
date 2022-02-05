@@ -175,17 +175,20 @@ const verifyToken = asyncHandler(async (req, res) => {
     );
 
     const userInDb = await User.findById(user);
-
+    // This is not handling the "Email already verified" correctly!
     if (userInDb.verified) {
       res.status(401);
       throw new Error('Email already verified');
     }
 
     await User.findByIdAndUpdate(user, { verified: true }, { new: true });
+    // This is not handling the error correctly, and no error is sent to the
+    // toast in the frontend!
   } catch (error) {
     res.status(400);
     throw new Error(error.message);
   }
+
   return res.redirect(process.env.FRONTEND);
 });
 
