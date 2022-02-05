@@ -28,7 +28,6 @@ app.use('/api/books', bookRouter);
 
 // Serve Frontend
 if (process.env.NODE_ENV === 'production') {
-  // Set build folder as static
   app.use(express.static(path.join(__dirname, '../frontend/build')));
 
   app.get('*', (_, res) => {

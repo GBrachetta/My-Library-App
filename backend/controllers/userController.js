@@ -89,7 +89,6 @@ const registerUser = asyncHandler(async (req, res) => {
 
   await user.save();
 
-  // END BEN
   if (user) {
     res.status(201).json({
       _id: user._id,
@@ -165,6 +164,9 @@ const getMe = asyncHandler(async (req, res) => {
   res.status(200).json(user);
 });
 
+// @desc    GET verify email address
+// @route   /api/users/verify-email/:verificationToken
+// @access  Public
 const verifyToken = asyncHandler(async (req, res) => {
   try {
     const { user } = jwt.verify(
@@ -187,6 +189,7 @@ const verifyToken = asyncHandler(async (req, res) => {
   return res.redirect(process.env.FRONTEND);
 });
 
+// Another possibility in the works
 // const verifyToken = async (req, res) => {
 //   const { verificationToken } = req.params;
 
