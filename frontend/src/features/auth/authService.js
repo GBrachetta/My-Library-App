@@ -23,7 +23,7 @@ const login = async (userData) => {
 // Logout
 const logout = () => localStorage.removeItem('user');
 
-// verify email (in the works)
+// verify email
 const verifyEmail = async (verificationToken) => {
   const response = await axios.get(
     `${API_URL}verify-email/${verificationToken}`,
@@ -31,13 +31,6 @@ const verifyEmail = async (verificationToken) => {
 
   return response.data;
 };
-
-// verify email
-// const verifyEmail = async (verificationToken) => {
-//   const response = await axios.get(`${API_URL}verify-email`, verificationToken);
-
-//   return response.data;
-// };
 
 const authService = {
   register,

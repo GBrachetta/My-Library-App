@@ -49,7 +49,7 @@ export const logout = createAsyncThunk('auth/logout', async () => {
   await authService.logout();
 });
 
-// TODO - verify email (not working)
+// Verify email
 export const verifyEmail = createAsyncThunk(
   'auth/verifyEmail',
   async (verificationToken, thunkApi) => {
