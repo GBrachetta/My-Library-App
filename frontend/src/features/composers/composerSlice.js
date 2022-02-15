@@ -11,6 +11,27 @@ const initialState = {
   message: '',
 };
 
+// Create new composer
+export const createComposer = createAsyncThunk(
+  'composers/create',
+  async (composerData, thunkApi) => {
+    try {
+      const { token } = thunkApi.getState().auth.user;
+
+      return await composerService.createComposer(composerData, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkApi.rejectWithValue(message);
+    }
+  },
+);
+
 export const composerSlice = createSlice({
   name: 'composer',
   initialState,
@@ -24,7 +45,21 @@ export const composerSlice = createSlice({
       state.message = '';
     },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(createComposer.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createComposer.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(createComposer.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      });
+  },
 });
 
 export const { reset } = composerSlice.actions;

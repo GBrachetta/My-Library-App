@@ -32,7 +32,7 @@ const getComposer = asyncHandler(async (req, res) => {
 // @route   POST /api/composers
 // @access  Private
 const createComposer = asyncHandler(async (req, res) => {
-  const { surname, names, country, born, dead } = req.body;
+  const { surname, names, country, born, died } = req.body;
 
   if (!surname) {
     res.status(400);
@@ -44,7 +44,7 @@ const createComposer = asyncHandler(async (req, res) => {
     names,
     country,
     born,
-    dead,
+    died,
   });
 
   res.status(201).json(ticket);
@@ -88,7 +88,7 @@ const updateComposer = asyncHandler(async (req, res) => {
   const updatedComposer = await Composer.findByIdAndUpdate(
     req.params.composerId,
     req.body,
-    { new: true },
+    { new: true }
   );
 
   res.status(201).json(updatedComposer);

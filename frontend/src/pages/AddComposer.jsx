@@ -1,7 +1,20 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import BackButton from '../components/BackButton';
+import Spinner from '../components/Spinner';
+import { createComposer, reset } from '../features/composers/composerSlice';
 
 const AddComposer = () => {
+  const { isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.composer,
+  );
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     surname: '',
     names: '',
@@ -12,6 +25,19 @@ const AddComposer = () => {
 
   const { surname, names, country, born, died } = formData;
 
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess) {
+      navigate('/composers');
+      toast.success('Composer added successfully');
+    }
+
+    dispatch(reset());
+  }, [isError, isSuccess, message, navigate, dispatch]);
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -21,8 +47,19 @@ const AddComposer = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    const composerData = {
+      surname,
+      names,
+      country,
+      born,
+      died,
+    };
+
+    dispatch(createComposer(composerData));
   };
+
+  if (isLoading) return <Spinner />;
 
   return (
     <>
@@ -104,9 +141,7 @@ const AddComposer = () => {
       </section>
 
       <section className="border-t-2">
-        <Link to="/" className="btn btn-secondary btn-sm rounded-btn my-3">
-          Back
-        </Link>
+        <BackButton url="/" />
       </section>
     </>
   );
