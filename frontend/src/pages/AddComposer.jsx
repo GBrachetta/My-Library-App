@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const AddAuthor = () => {
+const AddComposer = () => {
   const [formData, setFormData] = useState({
     surname: '',
     names: '',
@@ -27,7 +27,7 @@ const AddAuthor = () => {
   return (
     <>
       <div>
-        <h1 className="text-6xl border-b-2 pb-2">Add Author</h1>
+        <h1 className="text-6xl border-b-2 pb-2">Add Composer</h1>
       </div>
       <section className="flex justify-center">
         <form className="py-5" onSubmit={onSubmit}>
@@ -40,7 +40,7 @@ const AddAuthor = () => {
               value={surname}
               onChange={onChange}
               className="rounded text-black bg-gray-300 my-2"
-              placeholder="Enter author surname"
+              placeholder="Enter composer surname"
               required
             />
           </div>
@@ -53,7 +53,7 @@ const AddAuthor = () => {
               value={names}
               onChange={onChange}
               className="rounded text-black bg-gray-300 my-2"
-              placeholder="Enter author names"
+              placeholder="Enter composer names"
             />
           </div>
           <div className="form-control w-96">
@@ -65,7 +65,7 @@ const AddAuthor = () => {
               value={country}
               onChange={onChange}
               className="rounded text-black bg-gray-300 my-2"
-              placeholder="Enter author country"
+              placeholder="Enter composer country"
             />
           </div>
           <div className="form-control w-96">
@@ -77,7 +77,7 @@ const AddAuthor = () => {
               value={born}
               onChange={onChange}
               className="rounded text-black bg-gray-300 my-2"
-              placeholder="Enter author year of birth"
+              placeholder="Enter composer year of birth"
             />
           </div>
           <div className="form-control w-96">
@@ -89,7 +89,7 @@ const AddAuthor = () => {
               value={died}
               onChange={onChange}
               className="rounded text-black bg-gray-300 my-2"
-              placeholder="Enter author year of death"
+              placeholder="Enter composer year of death"
             />
           </div>
           <div className="form-control">
@@ -112,4 +112,4 @@ const AddAuthor = () => {
   );
 };
 
-export default AddAuthor;
+export default AddComposer;

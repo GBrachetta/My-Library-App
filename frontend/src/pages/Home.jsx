@@ -20,12 +20,14 @@ const Home = () => {
         {user && user.isAdmin && (
           <>
             <div className="mt-5">
-              <p className="my-5 text-lg inline-block mr-5">Add a new author</p>
+              <p className="my-5 text-lg inline-block mr-5">
+                Add a new composer
+              </p>
               <Link
-                to="/add-author"
+                to="/add-composer"
                 className="btn btn-sm  btn-primary rounded-sm my-2"
               >
-                Add Author
+                Add Composer
               </Link>
             </div>
             <div className="mt-5">

@@ -6,8 +6,8 @@ import { Flip, ToastContainer } from 'react-toastify';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
-import AddAuthor from './pages/AddAuthor';
 import AddBook from './pages/AddBook';
+import AddComposer from './pages/AddComposer';
 import Error from './pages/Error';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -34,7 +34,7 @@ function App() {
               />
               <Route path="/error" element={<Error />} />
               <Route path="/search" element={<SearchBook />} />
-              <Route path="/add-author" element={<AddAuthor />} />
+              <Route path="/add-composer" element={<AddComposer />} />
               <Route path="/add-book" element={<AddBook />} />
             </Routes>
           </main>
