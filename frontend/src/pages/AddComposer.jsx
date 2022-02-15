@@ -5,11 +5,12 @@ import { toast } from 'react-toastify';
 
 import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
+import Title from '../components/Title';
 import { createComposer, reset } from '../features/composers/composerSlice';
 
 const AddComposer = () => {
   const { isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.composer,
+    (state) => state.composers,
   );
 
   const dispatch = useDispatch();
@@ -63,9 +64,7 @@ const AddComposer = () => {
 
   return (
     <>
-      <div>
-        <h1 className="text-6xl border-b-2 pb-2">Add Composer</h1>
-      </div>
+      <Title title="Add Composer" />
       <section className="flex justify-center">
         <form className="py-5" onSubmit={onSubmit}>
           <div className="form-control w-96">

@@ -1,12 +1,14 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import Title from '../components/Title';
+
 const Home = () => {
   const { user } = useSelector((state) => state.auth);
 
   return (
     <>
-      <h1 className="text-6xl border-b-2 pb-2">Guillermo's Library</h1>
+      <Title title="Guillermo's Library" />
       <section className="container">
         <div className="mt-5">
           <p className="my-5 text-lg inline mr-5">Browse the collection</p>

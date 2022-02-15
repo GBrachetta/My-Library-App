@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import Spinner from '../components/Spinner';
+import Title from '../components/Title';
 import { login, reset } from '../features/auth/authSlice';
 
 const Login = () => {
@@ -55,9 +56,7 @@ const Login = () => {
 
   return (
     <>
-      <section>
-        <h1 className="text-6xl border-b-2 pb-2">Login</h1>
-      </section>
+      <Title title="Login" />
 
       <section className="flex justify-center">
         <form className="py-5" onSubmit={onSubmit}>

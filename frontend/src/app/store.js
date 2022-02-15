@@ -7,6 +7,6 @@ import composerReducer from '../features/composers/composerSlice';
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    composer: composerReducer,
+    composers: composerReducer,
   },
 });

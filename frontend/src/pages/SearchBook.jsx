@@ -1,5 +1,7 @@
+import Title from '../components/Title';
+
 const SearchBook = () => {
-  return <div>SearchBook</div>;
+  return <Title title="Search Book" />;
 };
 
 export default SearchBook;

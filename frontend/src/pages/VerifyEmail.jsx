@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import Spinner from '../components/Spinner';
+import Title from '../components/Title';
 import { reset, verifyEmail } from '../features/auth/authSlice';
 
 const VerifyEmail = () => {
@@ -51,7 +52,7 @@ const VerifyEmail = () => {
 
   return (
     <section>
-      <h1 className="text-6xl border-b-2 pb-2">Verify your email</h1>
+      <Title title="Verify Email" />
       <p className="my-5">Please click below to verify your email</p>
       <button type="button" className="btn btn-info" onClick={onVerify}>
         Verify Email
