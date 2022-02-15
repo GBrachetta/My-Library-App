@@ -6,10 +6,13 @@ import { Flip, ToastContainer } from 'react-toastify';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
+import AddAuthor from './pages/AddAuthor';
+import AddBook from './pages/AddBook';
 import Error from './pages/Error';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import SearchBook from './pages/SearchBook';
 import VerifyEmail from './pages/VerifyEmail';
 
 function App() {
@@ -30,6 +33,9 @@ function App() {
                 element={<VerifyEmail />}
               />
               <Route path="/error" element={<Error />} />
+              <Route path="/search" element={<SearchBook />} />
+              <Route path="/add-author" element={<AddAuthor />} />
+              <Route path="/add-book" element={<AddBook />} />
             </Routes>
           </main>
           <Footer />

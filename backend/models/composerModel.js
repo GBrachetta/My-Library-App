@@ -14,7 +14,7 @@ const composerSchema = mongoose.Schema({
   born: {
     type: String,
   },
-  dead: {
+  died: {
     type: String,
   },
 });
