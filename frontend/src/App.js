@@ -8,6 +8,8 @@ import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import AddBook from './pages/AddBook';
 import AddComposer from './pages/AddComposer';
+import Composer from './pages/Composer';
+import Composers from './pages/Composers';
 import Error from './pages/Error';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -33,9 +35,21 @@ function App() {
                 element={<VerifyEmail />}
               />
               <Route path="/error" element={<Error />} />
-              <Route path="/search" element={<SearchBook />} />
-              <Route path="/add-composer" element={<AddComposer />} />
-              <Route path="/add-book" element={<AddBook />} />
+              <Route path="/search" element={<PrivateRoute />}>
+                <Route path="/search" element={<SearchBook />} />
+              </Route>
+              <Route path="/add-composer" element={<PrivateRoute />}>
+                <Route path="/add-composer" element={<AddComposer />} />
+              </Route>
+              <Route path="/composers" element={<PrivateRoute />}>
+                <Route path="/composers" element={<Composers />} />
+              </Route>
+              <Route path="/composers/:composerId" element={<PrivateRoute />}>
+                <Route path="/composers/:composerId" element={<Composer />} />
+              </Route>
+              <Route path="/add-book" element={<PrivateRoute />}>
+                <Route path="/add-book" element={<AddBook />} />
+              </Route>
             </Routes>
           </main>
           <Footer />

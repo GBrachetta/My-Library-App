@@ -139,9 +139,7 @@ const AddComposer = () => {
         </form>
       </section>
 
-      <section className="border-t-2">
-        <BackButton url="/" />
-      </section>
+      <BackButton url="/" />
     </>
   );
 };

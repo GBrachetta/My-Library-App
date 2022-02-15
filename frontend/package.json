@@ -34,7 +34,8 @@
       "import/order": "off",
       "import/no-extraneous-dependencies": "off",
       "no-param-reassign": "off",
-      "no-shadow": "off"
+      "no-shadow": "off",
+      "no-underscore-dangle": "off"
     }
   },
   "prettier": "@gbrachetta/prettier-config",

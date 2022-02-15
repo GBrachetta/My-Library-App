@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 
 const BackButton = ({ url }) => {
   return (
-    <Link to={url} className="btn btn-secondary btn-sm rounded-btn my-5">
-      <FaArrowCircleLeft className="mr-2" /> Back
-    </Link>
+    <div className="border-t-2 mt-5">
+      <Link to={url} className="btn btn-secondary btn-sm rounded-btn my-5">
+        <FaArrowCircleLeft className="mr-2" /> Back
+      </Link>
+    </div>
   );
 };
 

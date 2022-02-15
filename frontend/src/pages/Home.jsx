@@ -14,9 +14,18 @@ const Home = () => {
           <p className="my-5 text-lg inline mr-5">Browse the collection</p>
           <Link
             to="/search"
-            className="btn btn-sm  btn-primary rounded-sm my-2"
+            className="btn btn-sm btn-secondary rounded-btn my-2"
           >
             Search
+          </Link>
+        </div>
+        <div className="mt-5">
+          <p className="my-5 text-lg inline mr-5">View Composers</p>
+          <Link
+            to="/composers"
+            className="btn btn-sm btn-secondary rounded-btn my-2"
+          >
+            Composers
           </Link>
         </div>
         {user && user.isAdmin && (
@@ -27,7 +36,7 @@ const Home = () => {
               </p>
               <Link
                 to="/add-composer"
-                className="btn btn-sm  btn-primary rounded-sm my-2"
+                className="btn btn-sm btn-secondary rounded-btn my-2"
               >
                 Add Composer
               </Link>
@@ -36,7 +45,7 @@ const Home = () => {
               <p className="my-5 text-lg inline-block mr-5">Add a new book</p>
               <Link
                 to="/add-book"
-                className="btn btn-sm  btn-primary rounded-sm my-2"
+                className="btn btn-sm btn-secondary rounded-btn my-2"
               >
                 Add Book
               </Link>
