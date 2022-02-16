@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import BackButton from '../components/BackButton';
@@ -65,9 +65,13 @@ const Composer = () => {
           <p className="font-semibold text-accent mt-5">
             Add a book by this composer
           </p>
-          <button type="button" className="btn btn-sm btn-primary my-3">
+          <Link
+            to="/add-book"
+            state={{ composerId }}
+            className="btn btn-sm btn-primary my-3"
+          >
             Add
-          </button>
+          </Link>
         </div>
       </section>
 
