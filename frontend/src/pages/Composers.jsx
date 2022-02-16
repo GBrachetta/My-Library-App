@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle */
+import Fuse from 'fuse.js';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,11 +12,21 @@ import { getComposers, reset } from '../features/composers/composerSlice';
 const Composers = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const { composers, isLoading, isSuccess } = useSelector(
-    (state) => state.composers,
-  );
+  const {
+    composers: rawComposers,
+    isLoading,
+    isSuccess,
+  } = useSelector((state) => state.composers);
 
   const dispatch = useDispatch();
+
+  const fuse = new Fuse(rawComposers, {
+    keys: ['surname', 'country'],
+    threshold: 0.4,
+  });
+
+  const results = fuse.search(searchTerm);
+  const composerResults = results.map((result) => result.item);
 
   useEffect(() => {
     dispatch(getComposers());
@@ -29,25 +40,28 @@ const Composers = () => {
 
   if (isLoading) return <Spinner />;
 
-  const filteredComposers = []
-    .concat(composers)
-    .filter(
-      (composer) =>
-        composer.surname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        composer.names.toLowerCase().includes(searchTerm.toLowerCase()),
-    )
-    .sort((a, b) => (a.surname > b.surname ? 1 : -1))
-    .map((composer) => <ComposerItem key={composer._id} composer={composer} />);
+  const composers = searchTerm
+    ? composerResults.map((composer) => (
+        <ComposerItem key={composer._id} composer={composer} />
+      ))
+    : []
+        .concat(rawComposers)
+        .sort((a, b) => (a.surname > b.surname ? 1 : -1))
+        .map((composer) => (
+          <ComposerItem key={composer._id} composer={composer} />
+        ));
 
   return (
     <>
       <Title title="Composers" />
 
       <section className="grid place-items-center border-b-2 ">
-        <p className="text-l text-gray-400 py-3">FILTER BY COMPOSER</p>
+        <p className="text-l text-gray-400 py-3">
+          FILTER BY COMPOSER OR COUNTRY
+        </p>
         <input
-          className="text-gray-700 mb-5"
-          type="text"
+          className="text-gray-700 mb-5 form-input"
+          type="search"
           placeholder="Search..."
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -72,7 +86,11 @@ const Composers = () => {
           </div>
         </div>
         <div className="table-row-group border-collapse border">
-          {filteredComposers}
+          {composers.length ? (
+            composers
+          ) : (
+            <p className="mt-5">No matching composers found</p>
+          )}
         </div>
       </section>
       <BackButton url="/" />
