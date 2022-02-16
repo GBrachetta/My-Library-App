@@ -75,7 +75,7 @@ export const getComposer = createAsyncThunk(
 );
 
 export const composerSlice = createSlice({
-  name: 'composer',
+  name: 'composers',
   initialState,
   reducers: {
     reset: (state) => {
@@ -106,7 +106,7 @@ export const composerSlice = createSlice({
       })
       .addCase(getComposers.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = false;
         state.composers = action.payload;
       })
       .addCase(getComposers.rejected, (state, action) => {

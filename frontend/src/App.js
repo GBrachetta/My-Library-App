@@ -8,13 +8,13 @@ import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import AddBook from './pages/AddBook';
 import AddComposer from './pages/AddComposer';
+import Books from './pages/Books';
 import Composer from './pages/Composer';
 import Composers from './pages/Composers';
 import Error from './pages/Error';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import SearchBook from './pages/SearchBook';
 import VerifyEmail from './pages/VerifyEmail';
 
 function App() {
@@ -35,9 +35,6 @@ function App() {
                 element={<VerifyEmail />}
               />
               <Route path="/error" element={<Error />} />
-              <Route path="/search" element={<PrivateRoute />}>
-                <Route path="/search" element={<SearchBook />} />
-              </Route>
               <Route path="/add-composer" element={<PrivateRoute />}>
                 <Route path="/add-composer" element={<AddComposer />} />
               </Route>
@@ -49,6 +46,9 @@ function App() {
               </Route>
               <Route path="/add-book" element={<PrivateRoute />}>
                 <Route path="/add-book" element={<AddBook />} />
+              </Route>
+              <Route path="/books" element={<PrivateRoute />}>
+                <Route path="/books" element={<Books />} />
               </Route>
             </Routes>
           </main>

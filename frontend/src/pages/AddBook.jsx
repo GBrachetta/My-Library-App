@@ -1,13 +1,23 @@
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import BackButton from '../components/BackButton';
+import Spinner from '../components/Spinner';
 import Title from '../components/Title';
+import { createBook, reset } from '../features/books/bookSlice';
 
 const AddBook = () => {
   const location = useLocation();
-
   const { composerId } = location.state;
+
+  const { isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.books,
+  );
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     title: '',
@@ -33,6 +43,19 @@ const AddBook = () => {
     catalogueNumber,
   } = formData;
 
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess) {
+      toast.success('Book added successfully');
+      navigate('/books');
+    }
+
+    dispatch(reset());
+  }, [isError, isSuccess, message, navigate, dispatch]);
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -42,7 +65,23 @@ const AddBook = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    const bookData = {
+      title,
+      subtitle,
+      composer,
+      setting,
+      dateComposed,
+      publisher,
+      comments,
+      hasParts,
+      catalogueNumber,
+    };
+
+    dispatch(createBook(bookData));
   };
+
+  if (isLoading) return <Spinner />;
 
   return (
     <>

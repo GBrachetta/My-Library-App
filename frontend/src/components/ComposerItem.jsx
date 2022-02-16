@@ -7,7 +7,8 @@ const ComposerItem = ({ composer }) => {
   return (
     <div className="table-row">
       <div className="table-cell pt-3 font-semibold">
-        {surname}, {names}
+        {surname}
+        {names ? ',' : ''} {names || ''}
       </div>
       <div className="table-cell pt-3 text-right font-semibold">{country}</div>
       <div className="table-cell pt-3 text-right font-semibold">{born}</div>

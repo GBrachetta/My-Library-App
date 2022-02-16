@@ -11,12 +11,12 @@ const Home = () => {
       <Title title="Guillermo's Library" />
       <section className="container">
         <div className="mt-5">
-          <p className="my-5 text-lg inline mr-5">Browse the collection</p>
+          <p className="my-5 text-lg inline mr-5">View Books</p>
           <Link
-            to="/search"
+            to="/books"
             className="btn btn-sm btn-secondary rounded-btn my-2"
           >
-            Search
+            Books
           </Link>
         </div>
         <div className="mt-5">

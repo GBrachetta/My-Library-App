@@ -2,6 +2,7 @@
 import Fuse from 'fuse.js';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import BackButton from '../components/BackButton';
 import ComposerItem from '../components/ComposerItem';
@@ -29,14 +30,16 @@ const Composers = () => {
   const composerResults = results.map((result) => result.item);
 
   useEffect(() => {
-    dispatch(getComposers());
-
     return () => {
       if (isSuccess) {
         dispatch(reset());
       }
     };
   }, [dispatch, isSuccess]);
+
+  useEffect(() => {
+    dispatch(getComposers());
+  }, [dispatch]);
 
   if (isLoading) return <Spinner />;
 
@@ -54,7 +57,6 @@ const Composers = () => {
   return (
     <>
       <Title title="Composers" />
-
       <section className="grid place-items-center border-b-2 ">
         <p className="text-l text-gray-400 py-3">
           FILTER BY COMPOSER OR COUNTRY
@@ -66,8 +68,7 @@ const Composers = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </section>
-
-      <section className="table w-full">
+      <section className="table w-full mb-5">
         <div className="table-header-group my-5 border-b-2 border-2">
           <div className="table-row ">
             <div className="table-cell border-b py-5 border-gray-600 font-bold">
@@ -93,6 +94,12 @@ const Composers = () => {
           )}
         </div>
       </section>
+      <div className="text-center border-t-2 border-gray-600">
+        <p className="font-semibold text-accent mt-5">Add a new composer</p>
+        <Link to="/add-composer" className="btn btn-sm btn-primary my-3">
+          Add
+        </Link>
+      </div>
       <BackButton url="/" />
     </>
   );
