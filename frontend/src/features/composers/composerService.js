@@ -28,9 +28,23 @@ const getComposers = async (token) => {
   return response.data;
 };
 
+// Get single composer
+const getComposer = async (composerId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.get(`${API_URL}${composerId}`, config);
+
+  return response.data;
+};
+
 const composerService = {
   createComposer,
   getComposers,
+  getComposer,
 };
 
 export default composerService;

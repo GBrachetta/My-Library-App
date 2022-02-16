@@ -53,6 +53,27 @@ export const getComposers = createAsyncThunk(
   },
 );
 
+// Get single composer
+export const getComposer = createAsyncThunk(
+  'composers/getOne',
+  async (composerId, thunkApi) => {
+    try {
+      const { token } = thunkApi.getState().auth.user;
+
+      return await composerService.getComposer(composerId, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkApi.rejectWithValue(message);
+    }
+  },
+);
+
 export const composerSlice = createSlice({
   name: 'composer',
   initialState,
@@ -89,6 +110,19 @@ export const composerSlice = createSlice({
         state.composers = action.payload;
       })
       .addCase(getComposers.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(getComposer.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getComposer.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.composer = action.payload;
+      })
+      .addCase(getComposer.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
