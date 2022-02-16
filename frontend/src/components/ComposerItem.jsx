@@ -6,16 +6,16 @@ const ComposerItem = ({ composer }) => {
 
   return (
     <div className="table-row">
-      <div className="table-cell pt-3">
+      <div className="table-cell pt-3 font-semibold">
         {surname}, {names}
       </div>
-      <div className="table-cell pt-3 text-right">{country}</div>
-      <div className="table-cell pt-3 text-right">{born}</div>
-      <div className="table-cell pt-3 text-right">{died}</div>
-      <div className="table-cell pt-3 text-right">
+      <div className="table-cell pt-3 text-right font-semibold">{country}</div>
+      <div className="table-cell pt-3 text-right font-semibold">{born}</div>
+      <div className="table-cell pt-3 text-right font-semibold">{died}</div>
+      <div className="table-cell pt-3 text-right font-semibold">
         <Link
           to={`/composers/${composer._id}`}
-          className="btn btn-sm btn-outline"
+          className="btn rounded-md btn-xs btn-outline"
         >
           View
         </Link>

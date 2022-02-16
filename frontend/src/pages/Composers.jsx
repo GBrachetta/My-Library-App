@@ -60,7 +60,7 @@ const Composers = () => {
           FILTER BY COMPOSER OR COUNTRY
         </p>
         <input
-          className="text-gray-700 mb-5 form-input"
+          className="text-gray-300 mb-5 form-input"
           type="search"
           placeholder="Search..."
           onChange={(e) => setSearchTerm(e.target.value)}
