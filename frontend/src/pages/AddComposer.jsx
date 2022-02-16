@@ -8,6 +8,32 @@ import Spinner from '../components/Spinner';
 import Title from '../components/Title';
 import { createComposer, reset } from '../features/composers/composerSlice';
 
+const countries = [
+  'Italy',
+  'Germany',
+  'France',
+  'Spain',
+  'United Kingdom',
+  'United States',
+  'The Netherlands',
+  'Belgium',
+  'Austria',
+  'Switzerland',
+  'Portugal',
+  'Denmark',
+  'Norway',
+  'Sweden',
+  'Finland',
+  'Ireland',
+  'Bohemia',
+  'Czech Republic',
+  'Poland',
+  'Hungary',
+  'Romania',
+  'Russia',
+  'Luxembourg',
+];
+
 const AddComposer = () => {
   const { isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.composers,
@@ -75,7 +101,6 @@ const AddComposer = () => {
               id="surname"
               value={surname}
               onChange={onChange}
-              className="rounded text-black bg-gray-300 my-2"
               placeholder="Enter composer surname"
               required
             />
@@ -88,21 +113,28 @@ const AddComposer = () => {
               id="names"
               value={names}
               onChange={onChange}
-              className="rounded text-black bg-gray-300 my-2"
               placeholder="Enter composer names"
             />
           </div>
           <div className="form-control w-96">
             <label htmlFor="surname">Country</label>
-            <input
+            <select
               type="text"
               name="country"
               id="country"
               value={country}
               onChange={onChange}
-              className="rounded text-black bg-gray-300 my-2"
               placeholder="Enter composer country"
-            />
+              className="cursor-pointer"
+            >
+              <option value="">Select country</option>
+              <option value="Other">Not Listed</option>
+              {countries.sort().map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="form-control w-96">
             <label htmlFor="surname">Year Born</label>
@@ -112,7 +144,6 @@ const AddComposer = () => {
               id="born"
               value={born}
               onChange={onChange}
-              className="rounded text-black bg-gray-300 my-2"
               placeholder="Enter composer year of birth"
             />
           </div>
@@ -124,7 +155,6 @@ const AddComposer = () => {
               id="died"
               value={died}
               onChange={onChange}
-              className="rounded text-black bg-gray-300 my-2"
               placeholder="Enter composer year of death"
             />
           </div>
