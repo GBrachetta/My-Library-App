@@ -18,6 +18,7 @@ const Composers = () => {
     isLoading,
     isSuccess,
   } = useSelector((state) => state.composers);
+  const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
@@ -94,12 +95,14 @@ const Composers = () => {
           )}
         </div>
       </section>
-      <div className="text-center border-t-2 border-gray-600">
-        <p className="font-semibold text-accent mt-5">Add a new composer</p>
-        <Link to="/add-composer" className="btn btn-sm btn-primary my-3">
-          Add
-        </Link>
-      </div>
+      {user && user.isAdmin && (
+        <div className="text-center border-t-2 border-gray-600">
+          <p className="font-semibold text-accent mt-5">Add a new composer</p>
+          <Link to="/add-composer" className="btn btn-sm btn-primary my-3">
+            Add
+          </Link>
+        </div>
+      )}
       <BackButton url="/" />
     </>
   );

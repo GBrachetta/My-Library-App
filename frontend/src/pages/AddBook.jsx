@@ -202,7 +202,7 @@ const AddBook = () => {
           </div>
         </form>
       </section>
-      <BackButton url="/" />
+      <BackButton url="/composers" />
     </>
   );
 };

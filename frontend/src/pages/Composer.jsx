@@ -44,7 +44,7 @@ const Composer = () => {
 
       <section>
         <div>
-          <p className="text-teal-500 text-center my-5 text-lg font-bold border-b-2 border-gray-600 pb-5">
+          <p className="text-info text-center my-5 text-3xl font-semibold border-b-2 border-gray-600 pb-5">
             {names || null} {surname}
             {country ? ', ' : ''} {country || null}
             {born ? ', ' : ''} {born || '?'} - {died || '?'}
@@ -62,7 +62,7 @@ const Composer = () => {
         </section>
 
         <div className="text-center border-t-2 border-gray-600">
-          <p className="font-semibold text-accent mt-5">
+          <p className="font-semibold text-info mt-5">
             Add a book by this composer
           </p>
           <Link

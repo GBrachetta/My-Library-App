@@ -21,8 +21,8 @@ const Navbar = () => {
       <div className="container mx-auto">
         <div className="flex-none px-2 mx-2">
           <Link to="/" className="text-lg font-bold align-middle">
-            <FaBook className="inline pr-2 text-3xl text-secondary" />{' '}
-            Guillermo's Library
+            <FaBook className="inline pr-2 text-3xl text-primary" /> Guillermo's
+            Library
           </Link>
         </div>
 
@@ -34,7 +34,7 @@ const Navbar = () => {
                 className="btn btn-ghost btn-sm rounded-btn"
                 onClick={onLogout}
               >
-                <FaSignOutAlt className="mr-2" /> Logout
+                <FaSignOutAlt className="mr-2 text-error" /> Logout
               </button>
             ) : (
               <Link to="/login" className="btn btn-ghost btn-sm rounded-btn">

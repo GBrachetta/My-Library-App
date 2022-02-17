@@ -169,7 +169,7 @@ const AddComposer = () => {
         </form>
       </section>
 
-      <BackButton url="/" />
+      <BackButton url="/composers" />
     </>
   );
 };
