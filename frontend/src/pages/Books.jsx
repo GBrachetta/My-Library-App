@@ -1,5 +1,4 @@
-import Fuse from 'fuse.js';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import BackButton from '../components/BackButton';
@@ -7,10 +6,9 @@ import BookItem from '../components/BookItem';
 import Spinner from '../components/Spinner';
 import Title from '../components/Title';
 import { getBooks, reset } from '../features/books/bookSlice';
+import { useFuzzySearch } from '../hooks/useFuzzySearch';
 
 const Books = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-
   const {
     books: rawBooks,
     isLoading,
@@ -19,13 +17,14 @@ const Books = () => {
 
   const dispatch = useDispatch();
 
-  const fuse = new Fuse(rawBooks, {
+  const fuzzyOptions = {
     keys: ['title', 'setting', 'composer.surname', 'composer.country'],
-    threshold: 0.4,
-  });
+  };
 
-  const results = fuse.search(searchTerm);
-  const bookResults = results.map((result) => result.item);
+  const { searchResults, setSearchTerm, searchTerm } = useFuzzySearch({
+    data: rawBooks,
+    fuzzyOptions,
+  });
 
   useEffect(() => {
     return () => {
@@ -40,7 +39,7 @@ const Books = () => {
   }, [dispatch]);
 
   const books = searchTerm
-    ? bookResults.map((book) => <BookItem key={book._id} book={book} />)
+    ? searchResults.map((book) => <BookItem key={book._id} book={book} />)
     : []
         .concat(rawBooks)
         .sort((a, b) => (a.title > b.title ? 1 : -1))

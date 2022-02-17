@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import Fuse from 'fuse.js';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -9,10 +8,9 @@ import ComposerItem from '../components/ComposerItem';
 import Spinner from '../components/Spinner';
 import Title from '../components/Title';
 import { getComposers, reset } from '../features/composers/composerSlice';
+import { useFuzzySearch } from '../hooks/useFuzzySearch';
 
 const Composers = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-
   const {
     composers: rawComposers,
     isLoading,
@@ -22,13 +20,14 @@ const Composers = () => {
 
   const dispatch = useDispatch();
 
-  const fuse = new Fuse(rawComposers, {
+  const fuzzyOptions = {
     keys: ['surname', 'country'],
-    threshold: 0.4,
-  });
+  };
 
-  const results = fuse.search(searchTerm);
-  const composerResults = results.map((result) => result.item);
+  const { searchResults, setSearchTerm, searchTerm } = useFuzzySearch({
+    data: rawComposers,
+    fuzzyOptions,
+  });
 
   useEffect(() => {
     return () => {
@@ -45,7 +44,7 @@ const Composers = () => {
   if (isLoading) return <Spinner />;
 
   const composers = searchTerm
-    ? composerResults.map((composer) => (
+    ? searchResults.map((composer) => (
         <ComposerItem key={composer._id} composer={composer} />
       ))
     : []
