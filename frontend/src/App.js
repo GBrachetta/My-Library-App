@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import AddBook from './pages/AddBook';
 import AddComposer from './pages/AddComposer';
+import Book from './pages/Book';
 import Books from './pages/Books';
 import Composer from './pages/Composer';
 import Composers from './pages/Composers';
@@ -49,6 +50,9 @@ function App() {
               </Route>
               <Route path="/books" element={<PrivateRoute />}>
                 <Route path="/books" element={<Books />} />
+              </Route>
+              <Route path="/books/:bookId" element={<PrivateRoute />}>
+                <Route path="/books/:bookId" element={<Book />} />
               </Route>
             </Routes>
           </main>

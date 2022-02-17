@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const mongoose = require('mongoose');
 const Book = require('../models/bookModel');
+const Composer = require('../models/composerModel');
 
 // @desc    Get all books
 // @route   GET /api/books
@@ -54,10 +55,17 @@ const addBook = asyncHandler(async (req, res) => {
     throw new Error('Please add a title and composer');
   }
 
+  const composerObject = await Composer.findById(composer);
+
+  if (!composerObject) {
+    res.status(404);
+    throw new Error('Composer not found');
+  }
+
   const book = await Book.create({
     title,
     subtitle,
-    composer,
+    composer: composerObject,
     setting,
     dateComposed,
     publisher,
@@ -116,7 +124,7 @@ const updateBook = asyncHandler(async (req, res) => {
   const updatedBook = await Book.findByIdAndUpdate(
     req.params.bookId,
     req.body,
-    { new: true },
+    { new: true }
   );
 
   res.status(201).json(updatedBook);

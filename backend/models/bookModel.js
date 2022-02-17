@@ -10,9 +10,8 @@ const bookSchema = mongoose.Schema(
       type: String,
     },
     composer: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Object,
       required: [true, 'Please add a composer'],
-      ref: 'Composer',
     },
     setting: {
       type: String,
@@ -29,8 +28,6 @@ const bookSchema = mongoose.Schema(
     },
     hasParts: {
       type: String,
-      enum: ['yes', 'no', 'n/a'],
-      default: 'n/a',
     },
     catalogueNumber: {
       type: String,
@@ -40,7 +37,7 @@ const bookSchema = mongoose.Schema(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 module.exports = mongoose.model('Book', bookSchema);
