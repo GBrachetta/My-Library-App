@@ -58,6 +58,7 @@ const Composers = () => {
   return (
     <>
       <Title title="Composers" />
+
       <section className="grid place-items-center border-b-2 ">
         <p className="text-l text-gray-400 py-3">
           FILTER BY COMPOSER OR COUNTRY
@@ -69,6 +70,7 @@ const Composers = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </section>
+
       <section className="table w-full mb-5">
         <div className="table-header-group my-5 border-b-2 border-2">
           <div className="table-row ">
@@ -95,6 +97,7 @@ const Composers = () => {
           )}
         </div>
       </section>
+
       {user && user.isAdmin && (
         <div className="text-center border-t-2 border-gray-600">
           <p className="font-semibold text-accent mt-5">Add a new composer</p>
@@ -103,6 +106,7 @@ const Composers = () => {
           </Link>
         </div>
       )}
+
       <BackButton url="/" />
     </>
   );
