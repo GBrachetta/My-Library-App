@@ -21,18 +21,20 @@ const Composer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isError) {
-      toast.error(message);
-    }
-
-    dispatch(getComposer(composerId));
-
     return () => {
       if (isSuccess) {
         dispatch(reset());
       }
     };
-  }, [dispatch, isError, message, composerId, isSuccess]);
+  }, [dispatch, isSuccess]);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    dispatch(getComposer(composerId));
+  }, [dispatch, isError, message, composerId]);
 
   if (isLoading) return <Spinner />;
 

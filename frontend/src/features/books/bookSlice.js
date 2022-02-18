@@ -75,7 +75,7 @@ export const getBook = createAsyncThunk(
 );
 
 export const bookSlice = createSlice({
-  name: 'book',
+  name: 'books',
   initialState,
   reducers: {
     reset: (state) => {

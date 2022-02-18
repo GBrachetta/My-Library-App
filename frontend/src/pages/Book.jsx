@@ -1,10 +1,90 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 import BackButton from '../components/BackButton';
+import Spinner from '../components/Spinner';
 import Title from '../components/Title';
+import { getBook, reset } from '../features/books/bookSlice';
 
 const Book = () => {
+  const { isLoading, isSuccess, isError, message, book } = useSelector(
+    (state) => state.books,
+  );
+
+  const { bookId } = useParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => {
+      if (isSuccess) {
+        dispatch(reset());
+      }
+    };
+  }, [dispatch, isSuccess]);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    dispatch(getBook(bookId));
+  }, [dispatch, isError, message, bookId]);
+
+  const {
+    title,
+    subtitle,
+    setting,
+    dateComposed,
+    publisher,
+    comments,
+    hasParts,
+    catalogueNumber,
+    composer,
+  } = book;
+
+  if (isLoading) return <Spinner />;
+
+  if (isError) return <div>Error</div>;
+
   return (
     <>
       <Title title="Book" />
+
+      <section>
+        <div>
+          <p className="text-info text-center mt-5 text-3xl font-semibold pb-2">
+            {title}
+          </p>
+          <p className="text-info text-center text-xl font-semibold pb-5">
+            {subtitle || null}
+          </p>
+          <p className="text-info text-center text-2xl font-semibold border-b-2 border-gray-600 pb-5">
+            {composer?.surname}
+            {composer?.names ? ', ' : ''}
+            {composer?.names || null}
+            {composer?.country ? ', ' : ''}
+            {composer?.country}
+            {composer?.born ? ', ' : ''}
+            {composer?.born}
+            {composer?.died ? ' - ' : ''}
+            {composer?.died}
+          </p>
+          <p className="text-info mt-5 font-semibold pb-2">
+            Setting: {setting}
+          </p>
+          <p className="text-info font-semibold pb-2">
+            Date Composed: {dateComposed}
+          </p>
+          <p className="text-info font-semibold pb-2">Publisher: {publisher}</p>
+          <p className="text-info font-semibold pb-2">Comments: {comments}</p>
+          <p className="text-info font-semibold pb-2">Has Parts: {hasParts}</p>
+          <p className="text-info font-semibold pb-2">
+            Catalogue Number: {catalogueNumber}
+          </p>
+        </div>
+      </section>
 
       <BackButton url="/books" />
     </>
