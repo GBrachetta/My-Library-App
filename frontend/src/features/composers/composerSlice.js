@@ -106,7 +106,7 @@ export const composerSlice = createSlice({
       })
       .addCase(getComposers.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = false;
+        state.isSuccess = true;
         state.composers = action.payload;
       })
       .addCase(getComposers.rejected, (state, action) => {

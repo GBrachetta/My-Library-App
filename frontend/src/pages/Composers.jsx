@@ -11,11 +11,9 @@ import { getComposers, reset } from '../features/composers/composerSlice';
 import { useFuzzySearch } from '../hooks/useFuzzySearch';
 
 const Composers = () => {
-  const {
-    composers: rawComposers,
-    isLoading,
-    isSuccess,
-  } = useSelector((state) => state.composers);
+  const { composers: rawComposers, isLoading } = useSelector(
+    (state) => state.composers,
+  );
   const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
@@ -30,15 +28,9 @@ const Composers = () => {
   });
 
   useEffect(() => {
-    return () => {
-      if (isSuccess) {
-        dispatch(reset());
-      }
-    };
-  }, [dispatch, isSuccess]);
-
-  useEffect(() => {
     dispatch(getComposers());
+
+    return () => dispatch(reset());
   }, [dispatch]);
 
   if (isLoading) return <Spinner />;
@@ -100,7 +92,11 @@ const Composers = () => {
       {user && user.isAdmin && (
         <div className="text-center border-t-2 border-gray-600">
           <p className="font-semibold text-accent mt-5">Add a new composer</p>
-          <Link to="/add-composer" className="btn btn-sm btn-primary my-3">
+          <Link
+            to="/add-composer"
+            className="btn btn-sm btn-primary my-3"
+            onClick={() => dispatch(reset())}
+          >
             Add
           </Link>
         </div>

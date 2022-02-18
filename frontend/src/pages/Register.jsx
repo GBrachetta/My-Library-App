@@ -36,7 +36,7 @@ const Register = () => {
       );
     }
 
-    dispatch(reset());
+    return () => dispatch(reset());
   }, [isError, isSuccess, message, navigate, user, dispatch]);
 
   const onChange = (e) => {

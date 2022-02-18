@@ -9,11 +9,7 @@ import { getBooks, reset } from '../features/books/bookSlice';
 import { useFuzzySearch } from '../hooks/useFuzzySearch';
 
 const Books = () => {
-  const {
-    books: rawBooks,
-    isLoading,
-    isSuccess,
-  } = useSelector((state) => state.books);
+  const { books: rawBooks, isLoading } = useSelector((state) => state.books);
 
   const dispatch = useDispatch();
 
@@ -27,15 +23,9 @@ const Books = () => {
   });
 
   useEffect(() => {
-    return () => {
-      if (isSuccess) {
-        dispatch(reset());
-      }
-    };
-  }, [dispatch, isSuccess]);
-
-  useEffect(() => {
     dispatch(getBooks());
+
+    return () => dispatch(reset());
   }, [dispatch]);
 
   const books = searchTerm

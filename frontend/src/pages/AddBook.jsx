@@ -53,7 +53,7 @@ const AddBook = () => {
       navigate('/books');
     }
 
-    dispatch(reset());
+    return () => dispatch(reset());
   }, [isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {

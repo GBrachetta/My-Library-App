@@ -9,7 +9,7 @@ import Title from '../components/Title';
 import { getBook, reset } from '../features/books/bookSlice';
 
 const Book = () => {
-  const { isLoading, isSuccess, isError, message, book } = useSelector(
+  const { isLoading, isError, message, book } = useSelector(
     (state) => state.books,
   );
 
@@ -17,19 +17,13 @@ const Book = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    return () => {
-      if (isSuccess) {
-        dispatch(reset());
-      }
-    };
-  }, [dispatch, isSuccess]);
-
-  useEffect(() => {
     if (isError) {
       toast.error(message);
     }
 
     dispatch(getBook(bookId));
+
+    return () => dispatch(reset());
   }, [dispatch, isError, message, bookId]);
 
   const {
@@ -61,7 +55,7 @@ const Book = () => {
             {subtitle || null}
           </p>
           <p className="text-info text-center text-2xl font-semibold border-b-2 border-gray-600 pb-5">
-            {composer?.surname}
+            {composer?.surname ?? <Spinner />}
             {composer?.names ? ', ' : ''}
             {composer?.names || null}
             {composer?.country ? ', ' : ''}

@@ -12,7 +12,6 @@ const Composer = () => {
   const {
     composer: { surname, names, country, born, died },
     isLoading,
-    isSuccess,
     isError,
     message,
   } = useSelector((state) => state.composers);
@@ -21,19 +20,13 @@ const Composer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    return () => {
-      if (isSuccess) {
-        dispatch(reset());
-      }
-    };
-  }, [dispatch, isSuccess]);
-
-  useEffect(() => {
     if (isError) {
       toast.error(message);
     }
 
     dispatch(getComposer(composerId));
+
+    return () => dispatch(reset());
   }, [dispatch, isError, message, composerId]);
 
   if (isLoading) return <Spinner />;

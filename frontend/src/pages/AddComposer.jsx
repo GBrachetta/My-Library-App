@@ -62,7 +62,7 @@ const AddComposer = () => {
       toast.success('Composer added successfully');
     }
 
-    dispatch(reset());
+    return () => dispatch(reset());
   }, [isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
