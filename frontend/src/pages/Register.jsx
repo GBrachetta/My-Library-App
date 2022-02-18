@@ -20,7 +20,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { user, isLoading, isSuccess, isError, message } = useSelector(
+  const { user, isLoading, isError, message } = useSelector(
     (state) => state.auth,
   );
 
@@ -29,15 +29,8 @@ const Register = () => {
       toast.error(message);
     }
 
-    if (isSuccess) {
-      navigate('/login');
-      toast.success(
-        'A confirmation email has been sent. Please check and login.',
-      );
-    }
-
     return () => dispatch(reset());
-  }, [isError, isSuccess, message, navigate, user, dispatch]);
+  }, [isError, message, navigate, user, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -58,7 +51,13 @@ const Register = () => {
         password,
       };
 
-      dispatch(register(userData));
+      dispatch(register(userData))
+        .then(() => navigate('/login'))
+        .then(() =>
+          toast.success(
+            'A confirmation email has been sent. Please check and login.',
+          ),
+        );
     }
   };
 

@@ -6,7 +6,6 @@ const initialState = {
   composers: [],
   composer: {},
   isError: false,
-  isSuccess: false,
   isLoading: false,
   message: '',
 };
@@ -83,7 +82,6 @@ export const composerSlice = createSlice({
       state.composer = {};
       state.isLoading = false;
       state.isError = false;
-      state.isSuccess = false;
       state.message = '';
     },
   },
@@ -94,7 +92,6 @@ export const composerSlice = createSlice({
       })
       .addCase(createComposer.fulfilled, (state) => {
         state.isLoading = false;
-        state.isSuccess = true;
       })
       .addCase(createComposer.rejected, (state, action) => {
         state.isLoading = false;
@@ -106,7 +103,6 @@ export const composerSlice = createSlice({
       })
       .addCase(getComposers.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
         state.composers = action.payload;
       })
       .addCase(getComposers.rejected, (state, action) => {
@@ -119,7 +115,6 @@ export const composerSlice = createSlice({
       })
       .addCase(getComposer.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
         state.composer = action.payload;
       })
       .addCase(getComposer.rejected, (state, action) => {

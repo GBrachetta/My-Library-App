@@ -35,7 +35,7 @@ const countries = [
 ];
 
 const AddComposer = () => {
-  const { isLoading, isError, isSuccess, message } = useSelector(
+  const { isLoading, isError, message } = useSelector(
     (state) => state.composers,
   );
 
@@ -57,13 +57,8 @@ const AddComposer = () => {
       toast.error(message);
     }
 
-    if (isSuccess) {
-      navigate('/composers');
-      toast.success('Composer added successfully');
-    }
-
     return () => dispatch(reset());
-  }, [isError, isSuccess, message, navigate, dispatch]);
+  }, [isError, message, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -83,7 +78,9 @@ const AddComposer = () => {
       died,
     };
 
-    dispatch(createComposer(composerData));
+    dispatch(createComposer(composerData))
+      .then(() => navigate('/composers'))
+      .then(() => toast.success('Composer added successfully'));
   };
 
   if (isLoading) return <Spinner />;

@@ -18,7 +18,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { user, isLoading, isSuccess, isError, message } = useSelector(
+  const { user, isLoading, isError, message } = useSelector(
     (state) => state.auth,
   );
 
@@ -27,12 +27,8 @@ const Login = () => {
       toast.error(message);
     }
 
-    if (isSuccess && user) {
-      navigate('/');
-    }
-
     return () => dispatch(reset());
-  }, [isError, isSuccess, message, navigate, user, dispatch]);
+  }, [isError, message, navigate, user, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -49,7 +45,7 @@ const Login = () => {
       password,
     };
 
-    dispatch(login(userData));
+    dispatch(login(userData)).then(() => navigate('/'));
   };
 
   if (isLoading) return <Spinner />;

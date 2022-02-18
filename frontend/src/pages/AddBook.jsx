@@ -12,9 +12,7 @@ const AddBook = () => {
   const location = useLocation();
   const { composerId } = location.state;
 
-  const { isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.books,
-  );
+  const { isLoading, isError, message } = useSelector((state) => state.books);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -48,13 +46,8 @@ const AddBook = () => {
       toast.error(message);
     }
 
-    if (isSuccess) {
-      toast.success('Book added successfully');
-      navigate('/books');
-    }
-
     return () => dispatch(reset());
-  }, [isError, isSuccess, message, navigate, dispatch]);
+  }, [isError, message, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -78,7 +71,9 @@ const AddBook = () => {
       catalogueNumber,
     };
 
-    dispatch(createBook(bookData));
+    dispatch(createBook(bookData))
+      .then(() => navigate('/books'))
+      .then(() => toast.success('Book added successfully'));
   };
 
   if (isLoading) return <Spinner />;

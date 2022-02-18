@@ -13,8 +13,9 @@ const VerifyEmail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user, isLoading, isSuccess, isError, message, isVerified } =
-    useSelector((state) => state.auth);
+  const { user, isLoading, isError, message, isVerified } = useSelector(
+    (state) => state.auth,
+  );
 
   useEffect(() => {
     if (isError) {
@@ -27,11 +28,6 @@ const VerifyEmail = () => {
       dispatch(verifyEmail(verificationToken, user));
     }
 
-    if (isSuccess) {
-      toast.success('Your email is verified, please log in');
-      navigate('/login');
-    }
-
     dispatch(reset());
   }, [
     dispatch,
@@ -40,12 +36,13 @@ const VerifyEmail = () => {
     message,
     navigate,
     user,
-    isSuccess,
     verificationToken,
   ]);
 
   const onVerify = () => {
-    dispatch(verifyEmail(verificationToken));
+    dispatch(verifyEmail(verificationToken))
+      .then(() => navigate('/login'))
+      .then(() => toast.success('Your email is verified, please log in'));
   };
 
   if (isLoading) return <Spinner />;

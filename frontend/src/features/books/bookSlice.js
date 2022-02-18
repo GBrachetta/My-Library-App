@@ -7,7 +7,6 @@ const initialState = {
   book: {},
   isError: false,
   isLoading: false,
-  isSuccess: false,
   message: '',
 };
 
@@ -83,7 +82,6 @@ export const bookSlice = createSlice({
       state.book = {};
       state.isError = false;
       state.isLoading = false;
-      state.isSuccess = false;
       state.message = '';
     },
   },
@@ -94,7 +92,6 @@ export const bookSlice = createSlice({
       })
       .addCase(createBook.fulfilled, (state) => {
         state.isLoading = false;
-        state.isSuccess = true;
       })
       .addCase(createBook.rejected, (state, action) => {
         state.isLoading = false;
@@ -106,7 +103,6 @@ export const bookSlice = createSlice({
       })
       .addCase(getBooks.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
         state.books = action.payload;
       })
       .addCase(getBooks.rejected, (state, action) => {
@@ -116,11 +112,9 @@ export const bookSlice = createSlice({
       })
       .addCase(getBook.pending, (state) => {
         state.isLoading = true;
-        state.isSuccess = false;
       })
       .addCase(getBook.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
         state.book = action.payload;
       })
       .addCase(getBook.rejected, (state, action) => {
