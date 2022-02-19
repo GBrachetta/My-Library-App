@@ -107,12 +107,32 @@ const deleteBook = asyncHandler(async (req, res) => {
 // @access  Private
 const updateBook = asyncHandler(async (req, res) => {
   // Check if book is a valid ObjectId
+  console.log('req.body');
   const bookIsValid = mongoose.isValidObjectId(req.params.bookId);
 
   if (!bookIsValid) {
     res.status(400);
     throw new Error('Book number not valid');
   }
+
+  const {
+    title,
+    subtitle,
+    composer,
+    setting,
+    dateComposed,
+    publisher,
+    comments,
+    hasParts,
+    catalogueNumber,
+  } = req.body;
+
+  if (!title || !composer) {
+    res.status(400);
+    throw new Error('Please add a title and composer');
+  }
+
+  const composerObject = await Composer.findById(composer);
 
   const book = await Book.findById(req.params.bookId);
 
@@ -123,7 +143,17 @@ const updateBook = asyncHandler(async (req, res) => {
 
   const updatedBook = await Book.findByIdAndUpdate(
     req.params.bookId,
-    req.body,
+    {
+      title,
+      subtitle,
+      composer: composerObject,
+      setting,
+      dateComposed,
+      publisher,
+      comments,
+      hasParts,
+      catalogueNumber,
+    },
     { new: true }
   );
 

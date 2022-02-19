@@ -16,6 +16,7 @@ import Error from './pages/Error';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import UpdateBook from './pages/UpdateBook';
 import VerifyEmail from './pages/VerifyEmail';
 
 function App() {
@@ -53,6 +54,9 @@ function App() {
               </Route>
               <Route path="/books/:bookId" element={<PrivateRoute />}>
                 <Route path="/books/:bookId" element={<Book />} />
+              </Route>
+              <Route path="/books/update/:bookId" element={<PrivateRoute />}>
+                <Route path="/books/update/:bookId" element={<UpdateBook />} />
               </Route>
             </Routes>
           </main>
