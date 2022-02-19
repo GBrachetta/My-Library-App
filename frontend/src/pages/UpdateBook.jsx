@@ -88,12 +88,21 @@ const UpdateBook = () => {
       <section className="flex justify-center">
         <form className="py-5" onSubmit={onSubmit}>
           <div className="form-control w-96">
-            <label htmlFor="composer">Composer</label>
             <input
-              type="text"
+              type="hidden"
               name="composer"
               id="composer"
               value={composer?._id}
+              disabled
+            />
+          </div>
+          <div className="form-control w-96">
+            <label htmlFor="composer">Composer</label>
+            <input
+              type="text"
+              name="composerShow"
+              id="composerShow"
+              value={`${composer?.surname}, ${composer?.names}`}
               disabled
             />
           </div>
