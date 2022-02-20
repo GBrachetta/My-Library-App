@@ -82,7 +82,6 @@ const Book = () => {
           <p className="font-semibold text-info mt-5">Update Book</p>
           <Link
             to={`/books/update/${bookId}`}
-            state={{ bookId }}
             className="btn btn-sm btn-primary my-3"
           >
             Update
