@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const mongoose = require('mongoose');
 const Composer = require('../models/composerModel');
+const Book = require('../models/bookModel');
 
 // @desc    Get all composers
 // @route   GET /api/composers
@@ -11,21 +12,25 @@ const getComposers = asyncHandler(async (req, res) => {
   res.status(200).json(composers);
 });
 
-// @desc    Get single ticket
+// @desc    Get single composer with his books
 // @route   GET /api/composers/:composerId
 // @access  Public
 const getComposer = asyncHandler(async (req, res) => {
   // Need to get composer by id due to multiple composers with the same name
   // Maybe a button next to a composer in the list all composers to
   // display works by that composer only.
-  const composer = await Composer.findById(req.params.composerId);
+  const composerId = req.params.composerId;
+  const composer = await Composer.findById(composerId);
+  const booksByComposer = await Book.find({
+    'composer._id': mongoose.Types.ObjectId(composerId),
+  });
 
   if (!composer) {
     res.status(404);
     throw new Error('Composer not found');
   }
 
-  res.status(200).json(composer);
+  res.status(200).json({ composer, booksByComposer });
 });
 
 // @desc    Crate new composer
