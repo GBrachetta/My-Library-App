@@ -33,9 +33,7 @@ const ComposerData = ({ composer, booksByComposer }) => {
   return (
     <>
       <section className="grid place-items-center border-b-2 ">
-        <p className="text-l text-gray-400 py-3">
-          FILTER BY TITLE, COMPOSER, SETTING OR COUNTRY
-        </p>
+        <p className="text-l text-gray-400 py-3">FILTER BY TITLE OR SETTING</p>
         <input
           className="text-gray-300 mb-5 form-input"
           type="search"

@@ -9,7 +9,7 @@ const BookItem = ({ book, noComposer }) => {
       <div className="table-cell pt-3 font-semibold">{title}</div>
       <div className="table-cell pt-3 font-semibold">{subtitle}</div>
       <div className="table-cell pt-3 font-semibold">{setting}</div>
-      {noComposer ?? (
+      {noComposer ? null : (
         <>
           <div className="table-cell pt-3 font-semibold">{`${composer.surname}${
             composer.names ? ',' : ''
