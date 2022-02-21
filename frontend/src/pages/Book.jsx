@@ -89,7 +89,7 @@ const Book = () => {
         </div>
       </section>
 
-      <BackButton url="/books" />
+      <BackButton url={`/composers/${composer?._id}`} />
     </>
   );
 };
