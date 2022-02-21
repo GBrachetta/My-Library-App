@@ -7,13 +7,14 @@ import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
 import Title from '../components/Title';
 import { createBook, reset } from '../features/books/bookSlice';
+import { getComposer } from '../features/composers/composerSlice';
 
 const AddBook = () => {
   const location = useLocation();
   const { composerId } = location.state;
 
   const { isLoading, isError, message } = useSelector((state) => state.books);
-
+  const { composer: composerData } = useSelector((state) => state.composers);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -46,8 +47,10 @@ const AddBook = () => {
       toast.error(message);
     }
 
+    dispatch(getComposer(composerId));
+
     return () => dispatch(reset());
-  }, [isError, message, navigate, dispatch]);
+  }, [isError, message, navigate, dispatch, composerId]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -84,12 +87,21 @@ const AddBook = () => {
       <section className="flex justify-center">
         <form className="py-5" onSubmit={onSubmit}>
           <div className="form-control w-96">
-            <label htmlFor="composer">Composer</label>
             <input
-              type="text"
+              type="hidden"
               name="composer"
               id="composer"
               value={composer}
+              disabled
+            />
+          </div>
+          <div className="form-control w-96">
+            <label htmlFor="composer">Composer</label>
+            <input
+              type="text"
+              name="composerShow"
+              id="composerShow"
+              value={`${composerData?.composer?.surname}, ${composerData?.composer?.names}`}
               disabled
             />
           </div>
@@ -185,6 +197,7 @@ const AddBook = () => {
               value={catalogueNumber}
               onChange={onChange}
               placeholder="Enter the catalogue number"
+              required
             />
           </div>
           <div className="form-control">
