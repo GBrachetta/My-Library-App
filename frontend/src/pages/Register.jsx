@@ -51,13 +51,16 @@ const Register = () => {
         password,
       };
 
-      dispatch(register(userData))
-        .then(() => navigate('/login'))
-        .then(() =>
+      dispatch(register(userData)).then(({ meta: { requestStatus } }) => {
+        if (requestStatus === 'fulfilled') {
           toast.success(
             'A confirmation email has been sent. Please check and login.',
-          ),
-        );
+          );
+          navigate('/login');
+        } else if (requestStatus === 'rejected') {
+          navigate('/register');
+        }
+      });
     }
   };
 
