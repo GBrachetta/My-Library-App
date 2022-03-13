@@ -18,5 +18,15 @@
       ],
       "outputCapture": "std",
     },
+  ],
+  "compounds": [
+    {
+      "name": "Server/Client",
+      "configurations": [
+        "Node: Nodemon",
+        "Launch Edge"
+      ],
+      "stopAll": true
+    }
   ]
 }
